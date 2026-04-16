@@ -1,6 +1,6 @@
 [project]
 name = "discourse-reader"
-version = "0.1.0"
+version = "1.0.0"
 description = "A simple Python wrapper for reading data from Discourse forums"
 license = { text = "MIT" }
 readme = "README.md"
