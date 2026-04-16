@@ -6,6 +6,47 @@ from pydantic import BaseModel, ConfigDict
 _ALLOW_EXTRA = ConfigDict(extra="allow")
 
 
+class SearchPost(BaseModel):
+    model_config = _ALLOW_EXTRA
+
+    id: int
+    name: str | None = None
+    username: str
+    avatar_template: str
+    created_at: datetime
+    like_count: int
+    blurb: str
+    post_number: int
+    topic_id: int
+
+
+class SearchResult(BaseModel):
+    model_config = _ALLOW_EXTRA
+
+    posts: list[SearchPost]
+    grouped_search_result: dict[str, Any]
+
+
+class User(BaseModel):
+    model_config = _ALLOW_EXTRA
+
+    id: int
+    username: str
+    name: str | None = None
+    avatar_template: str
+    title: str | None = None
+    moderator: bool = False
+    admin: bool = False
+    trust_level: int = 0
+    created_at: datetime | None = None
+    last_posted_at: datetime | None = None
+    last_seen_at: datetime | None = None
+    badge_count: int = 0
+    bio_excerpt: str | None = None
+    bio_cooked: str | None = None
+    profile_view_count: int = 0
+
+
 class SiteStatistics(BaseModel):
     model_config = _ALLOW_EXTRA
 

@@ -8,12 +8,14 @@ from discourse_reader.models import (
     Post,
     PostStream,
     Poster,
+    SearchPost,
     SiteStatistics,
     Tag,
     TagDetail,
     Topic,
     TopicDetail,
     TopicList,
+    User,
 )
 
 __all__ = [
@@ -26,10 +28,12 @@ __all__ = [
     "Post",
     "PostStream",
     "Poster",
+    "SearchPost",
     "SiteStatistics",
     "Tag",
     "TagDetail",
     "Topic",
     "TopicDetail",
     "TopicList",
+    "User",
 ]

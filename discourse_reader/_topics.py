@@ -64,9 +64,7 @@ class TopicResult:
     Use ``topic.detail`` for the raw TopicDetail model.
     """
 
-    def __init__(
-        self, detail: TopicDetail, posts: TopicPosts, accepted_post_number: int | None
-    ) -> None:
+    def __init__(self, detail: TopicDetail, posts: TopicPosts, accepted_post_number: int | None) -> None:
         self._detail = detail
         self._accepted_post_number = accepted_post_number
         self.posts = posts

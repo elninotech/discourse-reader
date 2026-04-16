@@ -5,7 +5,18 @@ import requests
 
 from discourse_reader._posts import PostsProxy
 from discourse_reader._topics import TopicsProxy
-from discourse_reader.models import About, Category, CategoryList, SiteStatistics, TagDetail
+from collections.abc import Iterator
+
+from discourse_reader.models import (
+    About,
+    Category,
+    CategoryList,
+    SearchPost,
+    SearchResult,
+    SiteStatistics,
+    TagDetail,
+    User,
+)
 
 
 class DiscourseClient:
@@ -55,3 +66,23 @@ class DiscourseClient:
     def tags(self) -> list[TagDetail]:
         data = self._get("/tags.json")
         return [TagDetail.model_validate(t) for t in data["tags"]]
+
+    def user(self, username: str) -> User:
+        data = self._get(f"/u/{username}.json")
+        return User.model_validate(data["user"])
+
+    def search(self, query: str, limit: int | None = None) -> Iterator[SearchPost]:
+        """Search the forum. Yields matching posts, paginating automatically."""
+        page = 1
+        yielded = 0
+        while True:
+            data = self._get(f"/search.json?q={query}&page={page}")
+            result = SearchResult.model_validate(data)
+            for post in result.posts:
+                yield post
+                yielded += 1
+                if limit is not None and yielded >= limit:
+                    return
+            if not result.grouped_search_result.get("more_full_page_results"):
+                return
+            page += 1
