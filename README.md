@@ -13,7 +13,7 @@ pip install discourse-reader
 ```python
 from discourse_reader import DiscourseClient
 
-client = DiscourseClient("https://community.victronenergy.com")
+client = DiscourseClient("https://meta.discourse.org")
 
 # Browse categories
 for cat in client.categories():
