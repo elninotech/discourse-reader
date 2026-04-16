@@ -144,6 +144,18 @@ class Tag(BaseModel):
     slug: str
 
 
+class TagDetail(BaseModel):
+    model_config = _ALLOW_EXTRA
+
+    id: int | str
+    name: str
+    text: str
+    description: str | None
+    count: int
+    pm_only: bool
+    target_tag: str | None
+
+
 class Poster(BaseModel):
     model_config = _ALLOW_EXTRA
 

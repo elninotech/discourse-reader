@@ -5,7 +5,7 @@ import requests
 
 from discourse_reader._posts import PostsProxy
 from discourse_reader._topics import TopicsProxy
-from discourse_reader.models import About, Category, CategoryList, SiteStatistics
+from discourse_reader.models import About, Category, CategoryList, SiteStatistics, TagDetail
 
 
 class DiscourseClient:
@@ -51,3 +51,7 @@ class DiscourseClient:
         data = self._get("/categories.json")
         category_list = CategoryList.model_validate(data["category_list"])
         return category_list.categories
+
+    def tags(self) -> list[TagDetail]:
+        data = self._get("/tags.json")
+        return [TagDetail.model_validate(t) for t in data["tags"]]
