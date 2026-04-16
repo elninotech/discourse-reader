@@ -194,3 +194,96 @@ class TopicList(BaseModel):
     more_topics_url: str | None = None
     per_page: int
     topics: list[Topic]
+
+
+class Post(BaseModel):
+    model_config = _ALLOW_EXTRA
+
+    id: int
+    post_number: int
+    post_type: int
+    cooked: str
+    created_at: datetime
+    updated_at: datetime
+    reply_count: int
+    quote_count: int
+    incoming_link_count: int
+    reads: int
+    readers_count: int
+    score: float
+    topic_id: int
+    topic_slug: str
+    version: int
+    hidden: bool
+    user_id: int
+    username: str
+    name: str | None = None
+    avatar_template: str
+    user_title: str | None
+    trust_level: int
+    moderator: bool
+    admin: bool
+    staff: bool
+    reply_to_post_number: int | None
+    deleted_at: str | None
+    user_deleted: bool
+    wiki: bool
+    post_url: str
+    posts_count: int
+    primary_group_name: str | None
+    flair_name: str | None
+    flair_url: str | None
+    flair_bg_color: str | None
+    flair_color: str | None
+    flair_group_id: int | None
+    bookmarked: bool
+    read: bool = False
+    yours: bool = False
+    edit_reason: str | None
+
+
+class PostStream(BaseModel):
+    model_config = _ALLOW_EXTRA
+
+    posts: list[Post]
+    stream: list[int]
+
+
+class TopicDetail(BaseModel):
+    model_config = _ALLOW_EXTRA
+
+    id: int
+    title: str
+    fancy_title: str
+    slug: str
+    archetype: str
+    category_id: int
+    posts_count: int
+    reply_count: int
+    highest_post_number: int
+    like_count: int
+    views: int
+    word_count: int | None
+    created_at: datetime
+    last_posted_at: datetime | None
+    visible: bool
+    closed: bool
+    archived: bool
+    pinned: bool
+    pinned_globally: bool
+    pinned_at: str | None
+    pinned_until: str | None
+    unpinned: bool | None
+    bookmarked: bool
+    featured_link: str | None
+    has_summary: bool
+    participant_count: int
+    chunk_size: int
+    image_url: str | None
+    user_id: int
+    deleted_at: str | None
+    show_read_indicator: bool
+    slow_mode_seconds: int
+    current_post_number: int
+    tags_descriptions: dict[str, str] = {}
+    post_stream: PostStream

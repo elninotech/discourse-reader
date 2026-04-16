@@ -5,10 +5,13 @@ from discourse_reader.models import (
     CategoryList,
     CategoryModerator,
     FeaturedTopic,
+    Post,
+    PostStream,
     Poster,
     SiteStatistics,
     Tag,
     Topic,
+    TopicDetail,
     TopicList,
 )
 
@@ -19,9 +22,12 @@ __all__ = [
     "CategoryModerator",
     "DiscourseClient",
     "FeaturedTopic",
+    "Post",
+    "PostStream",
     "Poster",
     "SiteStatistics",
     "Tag",
     "Topic",
+    "TopicDetail",
     "TopicList",
 ]
